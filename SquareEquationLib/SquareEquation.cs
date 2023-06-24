@@ -7,6 +7,7 @@ public class SquareEquation
 
         double[] roots;
         double eps = 0.000000001;
+        
         if (Math.Abs(a) < eps)
         {
             throw new System.ArgumentException();
