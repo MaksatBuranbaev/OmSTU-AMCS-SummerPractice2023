@@ -21,21 +21,25 @@ public class SquareEquation
         }
 
         double d = Math.Pow(b, 2) - 4 * a * c;
+        
         if (d < 0 && !(Math.Abs(d) < eps))
         {
             roots = new double[0];
         }
+        
         else if (d < eps)
         {   
             roots = new double[1];
             roots[0] = -(b + Math.Sign(b) * Math.Sqrt(d)) / 2;
         }
+        
         else
         {
             roots = new double[2];
             roots[0] = -(b + Math.Sign(b) * Math.Sqrt(d)) / 2;
             roots[1] = c / roots[0];
         }
+        
         return roots;
     }
 }
