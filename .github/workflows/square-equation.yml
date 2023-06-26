@@ -30,5 +30,6 @@ jobs:
       
       - name:  Coverage
         run: dotnet test --collect:"XPlat Code Coverage"
+
       - name:  Reportgenerator
         run: reportgenerator "-reports:coverage.cobertura.xml" "-targetdir:report" -reporttypes:Html
