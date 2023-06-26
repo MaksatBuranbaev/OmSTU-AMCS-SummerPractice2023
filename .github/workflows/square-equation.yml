@@ -30,12 +30,4 @@ jobs:
       
       - name:  Coverage
         run: dotnet test --collect:"XPlat Code Coverage"
-
-      - name:  Instal reportgenerator
-        run: dotnet tool install -g dotnet-reportgenerator-globaltool 
-      
-      - run: cd /home/runner/work/OmSTU-AMCS-SummerPractice2023/OmSTU-AMCS-SummerPractice2023/SquareEquationLib.Tests/TestResults/69d5570d-f1da-444f-a3dc-376ec687fcc4
-
-      - name:  Reportgenerator
-        run: reportgenerator "-reports:coverage.cobertura.xml" "-targetdir:report" -reporttypes:Html 
       
