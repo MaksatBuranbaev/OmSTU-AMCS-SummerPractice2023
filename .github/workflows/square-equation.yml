@@ -32,4 +32,4 @@ jobs:
         run: dotnet test --collect:"XPlat Code Coverage"
 
       - name:  Reportgenerator
-        run: reportgenerator "-reports:coverage.cobertura.xml" "-targetdir:report" -reporttypes:Html
+        run: dotnet tool install -g dotnet-reportgenerator-globaltool reportgenerator "-reports:coverage.cobertura.xml" "-targetdir:report" -reporttypes:Html
