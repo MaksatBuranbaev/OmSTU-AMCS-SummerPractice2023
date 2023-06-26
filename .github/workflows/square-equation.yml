@@ -31,5 +31,9 @@ jobs:
       - name:  Coverage
         run: dotnet test --collect:"XPlat Code Coverage"
 
+      - name:  Instal reportgenerator
+        run: dotnet tool install -g dotnet-reportgenerator-globaltool 
+      
       - name:  Reportgenerator
-        run: dotnet tool install -g dotnet-reportgenerator-globaltool reportgenerator "-reports:coverage.cobertura.xml" "-targetdir:report" -reporttypes:Html
+        run: cd SquareEquationLib.Tests/TestResults/49a1845d-a3f0-43c0-93fe-303e18304d8a
+          reportgenerator "-reports:coverage.cobertura.xml" "-targetdir:report" -reporttypes:Html 
