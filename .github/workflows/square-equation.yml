@@ -35,5 +35,4 @@ jobs:
         run: dotnet tool install -g dotnet-reportgenerator-globaltool 
       
       - name:  Reportgenerator
-        run: cd SquareEquationLib.Tests/TestResults/49a1845d-a3f0-43c0-93fe-303e18304d8a
-          reportgenerator "-reports:coverage.cobertura.xml" "-targetdir:report" -reporttypes:Html 
+        run: reportgenerator "-reports:coverage.cobertura.xml" "-targetdir:report" -reporttypes:Html 
