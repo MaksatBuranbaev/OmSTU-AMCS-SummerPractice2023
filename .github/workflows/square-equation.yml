@@ -35,4 +35,5 @@ jobs:
         run: dotnet tool install -g dotnet-reportgenerator-globaltool 
       
       - name:  Reportgenerator
-        run: reportgenerator "-reports:coverage.cobertura.xml" "-targetdir:report" -reporttypes:Html 
+        run: cd /home/runner/work/OmSTU-AMCS-SummerPractice2023/OmSTU-AMCS-SummerPractice2023
+          reportgenerator "-reports:coverage.cobertura.xml" "-targetdir:report" -reporttypes:Html 
