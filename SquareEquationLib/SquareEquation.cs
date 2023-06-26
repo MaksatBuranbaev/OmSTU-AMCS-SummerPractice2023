@@ -34,6 +34,13 @@ public class SquareEquation
             roots[0] = -(b + Math.Sign(b) * Math.Sqrt(d)) / 2;
         }
         
+        else if(b == 0)
+        {
+            roots = new double[2];
+            roots[0] = -(Math.Sqrt(d)) / 2;
+            roots[1] = c / roots[0];
+        }
+
         else
         {
             roots = new double[2];
