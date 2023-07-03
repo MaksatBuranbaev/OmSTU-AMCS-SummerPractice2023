@@ -2,7 +2,7 @@ name: square equation test
 
 on:
   push:
-    branches: ["squareEquation_tests"]
+    branches: ["gherkin_tests"]
 
 jobs:
   build:

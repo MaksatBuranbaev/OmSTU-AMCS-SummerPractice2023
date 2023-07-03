@@ -5,184 +5,99 @@ using SquareEquationLib;
 [Binding]
 public class SquareEquationBDD
 {
-    private Exception _actualException = new Exception ();
-   [Then("выбрасывается исключение ArgumentException")]
-    public void ThrowingArgumentException()
-    {
-        Assert.ThrowsAsync<ArgumentException>(() => throw _actualException);
-    }
+    private double a, b, c;
+    private double[] actualResult = new double[0]; 
+    private Exception actualException = new Exception();
 
-    [When(@"вычисляются корни квадратного уравнения")]
-         public void КогдаВычисляютсяКорниКвадратногоУравнения()
+    [Given(@"Квадратное уравнение с коэффициентами \((.*), (.*), (.*)\)")]
+    public void ДопустимКвадратноеУравнениеСКоэффициентами(string p0, string p1, string p2)
          {
-             _scenarioContext.Pending();
-         }
-    
-    [Given(@"Квадратное уравнение с коэффициентами \(NaN, (.*), (.*)\)")]
-         public void ДопустимКвадратноеУравнениеСКоэффициентамиNaN(int p0, int p1)
-         {
-             _scenarioContext.Pending();
-         }
-    
-    [When(@"вычисляются корни квадратного уравнения")]
-         public void КогдаВычисляютсяКорниКвадратногоУравнения()
-         {
-             _scenarioContext.Pending();
-         }
-        
-    [Given(@"Квадратное уравнение с коэффициентами \((.*), (.*), Double\.PositiveInfinity\)")]
-         public void ДопустимКвадратноеУравнениеСКоэффициентамиDouble_PositiveInfinity(int p0, int p1)
-         {
-             _scenarioContext.Pending();
-         }
+            string[] val = {p0, p1, p2};
+            double[] valDouble = new double[val.Length];
 
-    [When(@"вычисляются корни квадратного уравнения")]
-         public void КогдаВычисляютсяКорниКвадратногоУравнения()
-         {
-             _scenarioContext.Pending();
-         }
+            for (int i = 0; i < val.Length; i++)
+            {
+                if(val[i] == "NaN")
+                {
+                    valDouble[i] = double.NaN;
+                }
 
-    [Given(@"Квадратное уравнение с коэффициентами \((.*), (.*), Double\.NegativeInfinity\)")]
-         public void ДопустимКвадратноеУравнениеСКоэффициентамиDouble_NegativeInfinity(int p0, int p1)
-         {
-             _scenarioContext.Pending();
-         }
-    
-    [When(@"вычисляются корни квадратного уравнения")]
-         public void КогдаВычисляютсяКорниКвадратногоУравнения()
-         {
-             _scenarioContext.Pending();
-         }
+                else if(val[i] == "Double.NegativeInfinity")
+                {
+                    valDouble[i] = double.NegativeInfinity;
+                }
 
-    [Given(@"Квадратное уравнение с коэффициентами \(Double\.NegativeInfinity, (.*), (.*)\)")]
-         public void ДопустимКвадратноеУравнениеСКоэффициентамиDouble_NegativeInfinity(int p0, int p1)
-         {
-             _scenarioContext.Pending();
+                else if(val[i] == "Double.PositiveInfinity")
+                {
+                    valDouble[i] = double.PositiveInfinity;
+                }
+
+                else
+                {
+                    valDouble[i] = double.Parse(val[i]);
+                }
+            } 
+
+            a = valDouble[0]; b = valDouble[1]; c = valDouble[2];
          }
 
     [When(@"вычисляются корни квадратного уравнения")]
-         public void КогдаВычисляютсяКорниКвадратногоУравнения()
+    public void КогдаВычисляютсяКорниКвадратногоУравнения()
          {
-             _scenarioContext.Pending();
-         }
-
-    [Given(@"Квадратное уравнение с коэффициентами \(Double\.PositiveInfinity, (.*), (.*)\)")]
-         public void ДопустимКвадратноеУравнениеСКоэффициентамиDouble_PositiveInfinity(int p0, int p1)
-         {
-             _scenarioContext.Pending();
-         }
-        
-    [When(@"вычисляются корни квадратного уравнения")]
-         public void КогдаВычисляютсяКорниКвадратногоУравнения()
-         {
-             _scenarioContext.Pending();
-         }
-
-    [Given(@"Квадратное уравнение с коэффициентами \((.*)e(.*), (.*), (.*)\)")]
-         public void ДопустимКвадратноеУравнениеСКоэффициентамиE(int p0, int p1, int p2, int p3)
-         {
-             _scenarioContext.Pending();
-         }
-
-    [When(@"вычисляются корни квадратного уравнения")]
-         public void КогдаВычисляютсяКорниКвадратногоУравнения()
-         {
-             _scenarioContext.Pending();
-         }
-
-    [Given(@"Квадратное уравнение с коэффициентами \((.*), (.*), NaN\)")]
-         public void ДопустимКвадратноеУравнениеСКоэффициентамиNaN(int p0, int p1)
-         {
-             _scenarioContext.Pending();
+            try
+            {
+                actualResult = SquareEquation.Solve(a, b, c);
+            }
+            catch(Exception e)
+            {
+                actualException = e;
+            }
          }
 
     [Then(@"квадратное уравнение имеет два корня \((.*), (.*)\) кратности один")]
-         public void ТоКвадратноеУравнениеИмеетДваКорняКратностиОдин(int p0, int p1)
+    public void ТоКвадратноеУравнениеИмеетДваКорняКратностиОдин(double p0, double p1)
          {
-             _scenarioContext.Pending();
-         }
+             double[] expectedResult = new double[] {p0, p1};
+        
+            Array.Sort(expectedResult);
+            Array.Sort(actualResult);
 
-    [When(@"вычисляются корни квадратного уравнения")]
-         public void КогдаВычисляютсяКорниКвадратногоУравнения()
-         {
-             _scenarioContext.Pending();
-         }
+            if (actualResult.Length != 2)
+            {
+                Assert.Fail("");
+            }
 
-    [Given(@"Квадратное уравнение с коэффициентами \((.*), (.*), (.*)\)")]
-         public void ДопустимКвадратноеУравнениеСКоэффициентами(int p0, int p1, int p2)
-         {
-             _scenarioContext.Pending();
-         }
-
-    [When(@"вычисляются корни квадратного уравнения")]
-         public void КогдаВычисляютсяКорниКвадратногоУравнения()
-         {
-             _scenarioContext.Pending();
-         }
-
-    [Given(@"Квадратное уравнение с коэффициентами \((.*), Double\.NegativeInfinity, (.*)\)")]
-         public void ДопустимКвадратноеУравнениеСКоэффициентамиDouble_NegativeInfinity(int p0, int p1)
-         {
-             _scenarioContext.Pending();
-         }
+            for (int i = 0; i < expectedResult.Length; i++)
+            {
+                Assert.Equal(actualResult[i], expectedResult[i]);
+            }
+        }
 
     [Then(@"квадратное уравнение имеет один корень (.*) кратности два")]
-         public void ТоКвадратноеУравнениеИмеетОдинКореньКратностиДва(int p0)
+    public void ТоКвадратноеУравнениеИмеетОдинКореньКратностиДва(double p0)
          {
-             _scenarioContext.Pending();
-         }
+            double[] expectedResult = new double[] {p0};
+        
+            if (actualResult.Length != 1)
+            {
+                Assert.Fail("");
+            }
 
-    [When(@"вычисляются корни квадратного уравнения")]
-         public void КогдаВычисляютсяКорниКвадратногоУравнения()
-         {
-             _scenarioContext.Pending();
-         }
-
-    [Given(@"Квадратное уравнение с коэффициентами \((.*), (.*), (.*)\)")]
-         public void ДопустимКвадратноеУравнениеСКоэффициентами(int p0, int p1, int p2)
-         {
-             _scenarioContext.Pending();
-         }
-
-    [When(@"вычисляются корни квадратного уравнения")]
-         public void КогдаВычисляютсяКорниКвадратногоУравнения()
-         {
-             _scenarioContext.Pending();
-         }
-
-    [Given(@"Квадратное уравнение с коэффициентами \((.*), Double\.PositiveInfinity, (.*)\)")]
-         public void ДопустимКвадратноеУравнениеСКоэффициентамиDouble_PositiveInfinity(int p0, int p1)
-         {
-             _scenarioContext.Pending();
+            for (int i = 0; i < expectedResult.Length; i++)
+            {
+                Assert.Equal(actualResult[i], expectedResult[i]);
+            }
          }
 
     [Then(@"множество корней квадратного уравнения пустое")]
-         public void ТоМножествоКорнейКвадратногоУравненияПустое()
+    public void ТоМножествоКорнейКвадратногоУравненияПустое()
          {
-             _scenarioContext.Pending();
+            Assert.Empty(actualResult);
          }
 
-    [When(@"вычисляются корни квадратного уравнения")]
-         public void КогдаВычисляютсяКорниКвадратногоУравнения()
+    [Then(@"выбрасывается исключение ArgumentException")]
+         public void ТоВыбрасываетсяИсключениеArgumentException()
          {
-             _scenarioContext.Pending();
-         }
-
-    [Given(@"Квадратное уравнение с коэффициентами \((.*), (.*), (.*)\)")]
-         public void ДопустимКвадратноеУравнениеСКоэффициентами(int p0, int p1, int p2)
-         {
-             _scenarioContext.Pending();
-         }
-
-    [When(@"вычисляются корни квадратного уравнения")]
-         public void КогдаВычисляютсяКорниКвадратногоУравнения()
-         {
-             _scenarioContext.Pending();
-         }
-
-    [Given(@"Квадратное уравнение с коэффициентами \((.*), NaN, (.*)\)")]
-         public void ДопустимКвадратноеУравнениеСКоэффициентамиNaN(int p0, int p1)
-         {
-             _scenarioContext.Pending();
+            Assert.ThrowsAsync<ArgumentException>(() => throw actualException);
          }
 }
