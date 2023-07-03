@@ -98,6 +98,6 @@ public class SquareEquationBDD
     [Then(@"выбрасывается исключение ArgumentException")]
          public void ТоВыбрасываетсяИсключениеArgumentException()
          {
-            Assert.ThrowsAsync<ArgumentException>(() => throw actualException);
+            Assert.ThrowsAsync<ArgumentException>(() => SquareEquation.Solve(a, b, c));
          }
 }
