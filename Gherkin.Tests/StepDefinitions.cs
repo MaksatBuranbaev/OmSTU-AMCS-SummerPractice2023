@@ -7,7 +7,6 @@ public class SquareEquationBDD
 {
     private double a, b, c;
     private double[] actualResult = new double[0]; 
-    private Exception actualException = new Exception();
 
     [Given(@"Квадратное уравнение с коэффициентами \((.*), (.*), (.*)\)")]
     public void ДопустимКвадратноеУравнениеСКоэффициентами(string p0, string p1, string p2)
@@ -48,9 +47,9 @@ public class SquareEquationBDD
             {
                 actualResult = SquareEquation.Solve(a, b, c);
             }
-            catch(Exception e)
+            catch
             {
-                actualException = e;
+                
             }
          }
 
